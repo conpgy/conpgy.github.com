@@ -12,6 +12,7 @@ categories:
 [在GitHub上分享和展示你的代码](http://serholiu.com/github-share-code)
 
 OK,看完上面这两篇博文差不多了解了。下面将一些基础的命令记录下来。
+<!--more-->
 
 进入自己需要同步的目录, 建立一个仓库
 	cd ~/code
