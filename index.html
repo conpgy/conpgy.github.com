@@ -9,8 +9,7 @@
   <meta name="author" content="无着">
 
   
-  <meta name="description" content="刚开始学习git，下面是两篇教你如何使用git管理代码的教程： 使用git管理自己的代码&mdash;简单使用流程 在GitHub上分享和展示你的代码 OK,看完上面这两篇博文差不多了解了。下面将一些基础的命令记录下来。 进入自己需要同步的目录, 建立一个仓库 cd ~/code
-git init &hellip;">
+  <meta name="description" content="生在这个时代的人，不可能不受时代的影响。但是如果我们受时代的影响过深，而不知道回过头来纠正时代的错误，而让它一直蔓延下去，或者，对于过去的思想，不明白过去的思想不属于这个时代，然而却加以否定，那是错误的。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -57,8 +56,9 @@ git init &hellip;">
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">博客</a></li>
+  <li><a href="/blog/archives">目录</a></li>
+  <li><a href="/">关于我</a></li>
 </ul>
 
 </nav>
@@ -66,6 +66,47 @@ git init &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/ke-xue-he-zhe-xue-bu-shi-mo-neng-de/">科学和哲学不是万能的</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T22:33:55+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>生在这个时代的人，不可能不受时代的影响。但是如果我们受时代的影响过深，而不知道回过头来纠正时代的错误，而让它一直蔓延下去，或者，对于过去的思想，不明白过去的思想不属于这个时代，然而却加以否定，那是错误的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/ke-xue-he-zhe-xue-bu-shi-mo-neng-de/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -103,42 +144,12 @@ git init &hellip;">
 
 <p>OK,看完上面这两篇博文差不多了解了。下面将一些基础的命令记录下来。</p>
 
-<p>进入自己需要同步的目录, 建立一个仓库</p>
-
-<pre><code>cd ~/code
-git init
-</code></pre>
-
-<p>选择要添加仓库的文件</p>
-
-<pre><code>git add .
-</code></pre>
-
-<p>这里&#8217;.&lsquo;代表这个文件夹下的所有文件。</p>
-
-<p>使用git status命令查看我们做过哪些修改，建议在提交前都调用一下这个命令，看看我们做过什么改动。</p>
-
-<pre><code>git status
-</code></pre>
-
-<p>使用git commit命令将文件提交到本地的Repository中，也就是离线提交，这个时候是可以没有网络链接的。注意：m参数后面跟的是提交的注释，记录这次提交的改变</p>
-
-<pre><code>git commit -m 'test'
-</code></pre>
-
-<p>使用git clone命令将GitHub中创建的Repository同步到目录中</p>
-
-<pre><code>git clone git@github.com:conpgy/pgy.github.com.git
-</code></pre>
-
-<p>使用git push命令将代码提交到服务器中。git push命令后面可以跟分支名，新创建的Repository默认分支是master。如果不跟分支名，默认直接提交到主分支master上。</p>
-
-<pre><code>git push -u origin master
-</code></pre>
-
-<p>好了，现在你就可以到你的项目网站上查看你的代码了。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/yong-gitguan-li-zi-ji-de-dai-ma-ku/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -205,8 +216,12 @@ git init
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/26/ke-xue-he-zhe-xue-bu-shi-mo-neng-de/">科学和哲学不是万能的</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/04/26/yong-gitguan-li-zi-ji-de-dai-ma-ku/">用git管理自己的代码库</a>
@@ -218,10 +233,13 @@ git init
     
   </ul>
 </section>
-
-
-
-
+<section>
+  <h1>文章分类</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/胡语/'>胡语 (1)</a></li>
+ 
+  </ul>
+</section>
 
   
 </aside>
