@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[无着的博客]]></title>
   <link href="http://conpgy.github.io/atom.xml" rel="self"/>
   <link href="http://conpgy.github.io/"/>
-  <updated>2014-04-26T20:36:39+08:00</updated>
+  <updated>2014-04-26T21:20:30+08:00</updated>
   <id>http://conpgy.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[无着]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用git管理自己的代码库]]></title>
+    <link href="http://conpgy.github.io/blog/2014/04/26/yong-gitguan-li-zi-ji-de-dai-ma-ku/"/>
+    <updated>2014-04-26T20:59:40+08:00</updated>
+    <id>http://conpgy.github.io/blog/2014/04/26/yong-gitguan-li-zi-ji-de-dai-ma-ku</id>
+    <content type="html"><![CDATA[<p>刚开始学习git，下面是两篇教你如何使用git管理代码的教程：</p>
+
+<p><a href="http://my.oschina.net/moishalo/blog/72206">使用git管理自己的代码&mdash;简单使用流程</a></p>
+
+<p><a href="http://serholiu.com/github-share-code">在GitHub上分享和展示你的代码</a></p>
+
+<p>OK,看完上面这两篇博文差不多了解了。下面将一些基础的命令记录下来。</p>
+
+<p>进入自己需要同步的目录, 建立一个仓库</p>
+
+<pre><code>cd ~/code
+git init
+</code></pre>
+
+<p>选择要添加仓库的文件</p>
+
+<pre><code>git add .
+</code></pre>
+
+<p>这里&#8217;.&lsquo;代表这个文件夹下的所有文件。</p>
+
+<p>使用git status命令查看我们做过哪些修改，建议在提交前都调用一下这个命令，看看我们做过什么改动。</p>
+
+<pre><code>git status
+</code></pre>
+
+<p>使用git commit命令将文件提交到本地的Repository中，也就是离线提交，这个时候是可以没有网络链接的。注意：m参数后面跟的是提交的注释，记录这次提交的改变</p>
+
+<pre><code>git commit -m 'test'
+</code></pre>
+
+<p>使用git clone命令将GitHub中创建的Repository同步到目录中</p>
+
+<pre><code>git clone git@github.com:conpgy/pgy.github.com.git
+</code></pre>
+
+<p>使用git push命令将代码提交到服务器中。git push命令后面可以跟分支名，新创建的Repository默认分支是master。如果不跟分支名，默认直接提交到主分支master上。</p>
+
+<pre><code>git push -u origin master
+</code></pre>
+
+<p>好了，现在你就可以到你的项目网站上查看你的代码了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[三转四谛]]></title>
