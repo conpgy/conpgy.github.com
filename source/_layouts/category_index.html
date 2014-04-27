@@ -2,8 +2,6 @@
 layout: default
 ---
 
-<div class="archive-page-wrapper">
-  {% for post in site.categories[page.category] %}
-    {% include archive_post.html %}
-  {% endfor %}
-</div>
+{% for post in site.categories[page.category] %}
+	{% include archive_post.html %}
+{% endfor %}

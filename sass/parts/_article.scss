@@ -3,23 +3,22 @@ article{
 	border-top: 1px solid $color-gray05;
 	padding: 30px 0;
 	position: relative;
-	//@media screen and (max-width: 800px){
-	//	padding-bottom: 15px;
-	//}
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 800px){
+		padding-bottom: 15px;
+	}
+	@media screen and (max-width: 600px){
 		padding: 15px 0;
 	}
 	h1.title{
-		# font-weight: 300;
-		line-height: 45px;
-    margin: 20px 0 35px 0;
+		font-weight: 300;
+		line-height: 35px;
+		margin-bottom: 20px;
 		a{
 			color: $color-gray01;
 		}
 	}
 	.entry-content{
-		line-height: 1.5;
-    margin-bottom: 50px;
+		line-height: 2;
 		text-align: justify;
 		a{
 			&:hover{
@@ -32,19 +31,18 @@ article{
 			padding-left: 30px;
 			position: relative;
 			&:before{
-				content: "\f061";
-				font: 1.3em $font-icon;
-				line-height: 1.6em;
-				position: absolute;
-				left: 0;
+				// content: "\f061";
+				// font: 1.3em $font-icon;
+				// line-height: 1.6em;
+				// position: absolute;
+				// left: 0;
 			}
 		}
 		p, blockquote, ul, ol, dl, table, iframe, h1, h2, h3, h4, h5, h6, .video-container{
-			margin-top: 10px;
+			margin-top: 20px;
 		}
 		ul, ol, dl{
 			margin-left: 20px;
-			margin-bottom: 30px;
 			ul, ol, dl{
 				margin-top: 0;
 			}
@@ -59,7 +57,7 @@ article{
 			margin-top: 10px;	
 		}
 		h2{
-			# font-weight: 300;
+			font-weight: 300;
 			border-bottom: 1px solid $color-gray04;
 			position: relative;
 			&:before{
@@ -88,8 +86,7 @@ article{
 			border: none;
 		}
 		table{
-			// background: $color-gray04;
-			background: #EDEDC0;
+			background: $color-gray04;
 			border: 1px solid $color-gray03;
 			border-spacing: 0;
 			margin-top: 10px;
@@ -139,8 +136,6 @@ article{
 	}
 }
 .share{
-// 	padding: 15px 0;
-//	@include border-shadow();
-position: relative;
-z-index: 1;
+	padding: 15px 0;
+	@include border-shadow();
 }

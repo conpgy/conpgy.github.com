@@ -5,7 +5,7 @@ $header-height: 30px;
 	padding: 30px 0;
 	border-bottom: 1px solid $color-gray04;
 	line-height: $header-height;
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 1040px){
 		height: auto;
 		position: relative;
 		padding-bottom: 10px;
@@ -21,7 +21,7 @@ $header-height: 30px;
 		float: left;
 		font-weight: 300;
 		font-size: 30px;
-		@media screen and (max-width: 900px){
+		@media screen and (max-width: 1040px){
 			float: none;
 		}
 	}
@@ -29,19 +29,19 @@ $header-height: 30px;
 #main-nav{
 	float: left;
 	margin-left: 30px;
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 1040px){
 		float: none;
 		margin-left: 0;
 		margin-top: 15px;
 	}
 	>ul{
-		@media screen and (max-width: 900px){
+		@media screen and (max-width: 600px){
 			display: none;
 		}
 		>li{
 			margin-left: 50px;
 			@include inline-block;
-			@media screen and (max-width: 900px){
+			@media screen and (max-width: 1040px){
 				margin-left: 0;
 				margin-right: 50px;
 				&:last-of-type{
@@ -67,7 +67,7 @@ $header-height: 30px;
 						content: "";
 					}
 				}
-				@media screen and (max-width: 900px){
+				@media screen and (max-width: 1040px){
 					padding: 18px 0;
 				}
 			}
@@ -82,7 +82,7 @@ $header-height: 30px;
 			border: 1px solid $color-gray03;
 			list-style: none;
 			display: none;
-			@media screen and (max-width: 900px){
+			@media screen and (max-width: 1040px){
 				top: 40px;
 			}
 			@include box-shadow(0 4px 8px rgba(0,0,0,0.1));
@@ -140,7 +140,7 @@ $header-height: 30px;
 	select{
 		display: none;
 		margin-bottom: 10px;
-		@media screen and (max-width: 900px){
+		@media screen and (max-width: 600px){
 			display: block;
 		}
 	}
@@ -149,7 +149,7 @@ $header-height: 30px;
 	display: none;
 	height: 37px;
 	position: relative;
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 600px){
 		display: block;
 	}
 	a{
@@ -257,19 +257,19 @@ $header-height: 30px;
 	}
 }
 #sub-nav{
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 1040px){
 		position: absolute;
 		top: 30px;
 		right: 0;
 	}
-	@media screen and (max-width: 900px){
+	@media screen and (max-width: 600px){
 		display: none;
 	}
 	.search{
 		float: left;
 		margin-top: 1px;
 		position: relative;
-		@media screen and (max-width: 900px){
+		@media screen and (max-width: 1040px){
 			float: none;
 			margin-top: 15px;
 		}
@@ -302,7 +302,7 @@ $header-height: 30px;
 	.social{
 		float: left;
 		margin-right: 15px;
-		@media screen and (max-width: 900px){
+		@media screen and (max-width: 1040px){
 			float: none;
 			margin-right: 0;
 			a:last-of-type{
@@ -313,12 +313,19 @@ $header-height: 30px;
 			@include border-radius(50%);
 			@include inline-block;
 			text-indent: -9999px;
-			margin-right: 15px;
+			margin: 0 15px 15px 0;
 			opacity: 0.5;
 			@include square(28px);
 			@include transition(0.3s);
 			&:hover{
 				opacity: 1;
+			}
+			&.email{
+				background: image-url('social/email.png') center no-repeat #050505;
+				border: 1px solid #050505;
+				&:hover{
+					border: 1px solid darken(#050505, 10%);
+				}
 			}
 			&.facebook{
 				background: image-url('social/facebook.png') center no-repeat #3B5998;
@@ -355,12 +362,16 @@ $header-height: 30px;
 					border: 1px solid darken(#3E8DCC, 10%);
 				}
 			}
+			&.stackoverflow{
+				background: image-url('social/stackoverflow.png') center no-repeat #EF7522;
+				border:1px solid #EF7522;
+				&:hover{
+					border:1px solid #CC7A00;
+				}
+			}
 			&.linkedin{
 				background: image-url('social/linkedin.png') center no-repeat #005A87;
 				border: 1px solid #005A87;
-				&:hover{
-					border: 1px solid darken(#005A87, 10%);
-				}
 			}
 			&.pinterest{
 				background: image-url('social/pinterest.png') center no-repeat rgb(190,64,55);
@@ -377,11 +388,39 @@ $header-height: 30px;
 				}
 			}
 			&.pinboard{
-			  background: image-url('social/pinboard.png') center no-repeat rgb(0,102,200);
-			  border: 1px solid rgb(58,114,159);
-			  &:hover{
-			    border: 1px solid darken(rgb(0,102,255), 10%);
-			  }
+			  	background: image-url('social/pinboard.png') center no-repeat rgb(0,102,200);
+			  	border: 1px solid rgb(58,114,159);
+			  	&:hover{
+			    	border: 1px solid darken(rgb(0,102,255), 10%);
+			  	}
+			}
+			&.douban{
+			  	background: image-url('social/douban.png') center no-repeat rgb(0,128,36);
+			  	border: 1px solid rgb(0,128,36);
+			  	&:hover{
+			    	border: 1px solid darken(rgb(0,128,36), 10%);
+			  	}
+			}
+			&.quora{
+				background: image-url('social/quora.png') center no-repeat #a82400;
+				border: 1px solid #a82400;
+				&:hover{
+					border: 1px solid darken(#a82400, 10%);
+			 	}
+			}
+      		&.instagram{
+				background: image-url('social/instagram.png') center no-repeat #517fa4;
+				border: 1px solid #517fa4;
+				&:hover{
+					border: 1px solid darken(#517fa4, 10%);
+			 	}
+			}
+      		&.behance{
+				background: image-url('social/behance.png') center no-repeat #1769ff;
+				border: 1px solid #1769ff;
+				&:hover{
+					border: 1px solid darken(#1769ff, 10%);
+			  	}
 			}
 			&.rss{
 				background: image-url('social/rss.png') center no-repeat #EF7522;
