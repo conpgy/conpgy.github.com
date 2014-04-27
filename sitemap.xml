@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://conpgy.github.io/blog/2014/04/26/san-zhuan-si-di/</loc>
-        <lastmod>2014-04-27T10:40:18+08:00</lastmod>
+        <lastmod>2014-04-27T17:22:28+08:00</lastmod>
     </url>
     <url>
         <loc>http://conpgy.github.io/blog/2014/04/26/yong-gitguan-li-zi-ji-de-dai-ma-ku/</loc>
@@ -13,12 +13,18 @@
         <lastmod>2014-04-27T10:40:18+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://conpgy.github.io/blog/2014/04/27/dui-ren-sheng-%2C-yu-zhou-de-si-kao-he-tai-du/
+        </loc>
+        <lastmod>2014-04-27T17:24:51+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://conpgy.github.io/404.html</loc>
-        <lastmod>2014-04-27T10:40:18+08:00</lastmod>
+        <lastmod>2014-04-27T17:18:01+08:00</lastmod>
     </url>
     <url>
         <loc>http://conpgy.github.io/blog/archives/</loc>
-        <lastmod>2014-04-27T10:40:18+08:00</lastmod>
+        <lastmod>2014-04-27T17:24:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://conpgy.github.io/blog/categories/</loc>
@@ -26,7 +32,7 @@
     </url>
     <url>
         <loc>http://conpgy.github.io/</loc>
-        <lastmod>2014-04-27T10:40:18+08:00</lastmod>
+        <lastmod>2014-04-27T17:24:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://conpgy.github.io/robots.txt</loc>
