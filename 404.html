@@ -1,6 +1,8 @@
 
 <!DOCTYPE HTML>
+
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>404 Error - 无着的博客</title>
@@ -20,12 +22,12 @@
 	<link rel="canonical" href="http://conpgy.github.io/404.html">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
-	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	
+  
 
 </head>
 
@@ -34,19 +36,31 @@
 	<div class="container">
 		<div class="left-col">
 			<div class="intrude-less">
-			<header id="header" class="inner"><nav id="main-nav"><ul class="main-navigation">
-  <li><a href="/">博客</a></li>
-  <li><a href="/blog/archives">目录</a></li>
-  <li><a href="/">关于我</a></li>
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/shashankmehta">About</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
 </ul>
 </nav>
-<!-- <nav id="sub-nav">
+<nav id="sub-nav">
 	<div class="social">
 		
 		
 		
 		
-		<a class="github" href="https://github.com/conpgy" title="GitHub">GitHub</a>
+		
+			<a class="github" href="https://github.com/conpgy" title="GitHub">GitHub</a>
 		
 		
 		
@@ -54,42 +68,24 @@
 		
 		
 		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
 		
 	</div>
-</nav> -->
-<div class="profile-container">
-  <div class="profilepic">
-    <script src="/javascripts/md5.js"></script>
-    <script type="text/javascript">
-$(function(){
-  $('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-});
-    </script>
-  </div>
-  <hgroup>
-  <h1 class="site-title"><a href="/">无着的博客</a></h1>
-  
-  <p class="site-subtitle">一即一切，一切即一</p>
-  
-  </hgroup>
-  <hgroup>
-  <h1><a href="/">无着的博客</a></h1>
-  
-    <h2>一即一切，一切即一</h2>
-  
-</hgroup>
-
-</div>
-</header>
+</nav>
+</header>				
 			</div>
-		</div>
+		</div>	
 		<div class="mid-col">
 			
 				
 			
 			<div class="mid-col-container">
-				<div id="content" class="article-inner"><article class="page">
+				<div id="content" class="inner"><article class="page">
     
     <h1 class="title">404 Error</h1>
     
@@ -101,14 +97,15 @@ $(function(){
 
 </div>
 			</div>
-			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2014 - 无着 -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+			<footer id="footer" class="inner">Copyright &copy; 2014
 
-<p>Theme: <a href="https://github.com/qingwang/octopress-theme-yinyang">YinYang</a></p>
-</footer>
-			<script src="/javascripts/slash.js"></script>
+    无着
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	<script src="/javascripts/slash.js"></script>
 <script src="/javascripts/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
@@ -121,8 +118,5 @@ $(function(){
 
 
 
-
-		</div>
-	</div>
 </body>
 </html>
