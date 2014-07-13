@@ -98,7 +98,7 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">OC中JSON和XML的解析</h1>
-	<div class="entry-content" itemprop="articleBody"><h2>JSON</h2>
+	<div class="entry-content" itemprop="articleBody"><h3>JSON</h3>
 
 <p>JSON是一种轻量级的数据格式，一般用于数据交互。服务器返回给客户端的数据一般都是JSON或者XML，当然除了下载文件。</p>
 
@@ -111,6 +111,78 @@
 <p>标准的JSON格式key必须用双引号。要想从JSON中挖掘具体的数据，需要对JSON进行解析。JSON转换为OC数据类型：</p>
 
 <p><img src="../../../../../pictures/jsonOc.png" alt="" /></p>
+
+<p>在iOS中，JSON的常见解析方案有四种</p>
+
+<ul>
+<li>第三方库：JSONKit、SBJson、TouchJSON</li>
+<li>苹果自带：NSJSONSerialization(性能最好)</li>
+</ul>
+
+
+<p>NSJSONSerialization的常见方法</p>
+
+<ul>
+<li><p>JSON数据-OC对象</p>
+
+<p>+(id)JSONObjectWithData:(NSData <em>)data options:(NSJSONReadingOptions)opt error:(NSError </em>)error;</p></li>
+<li><p>OC对象-JSON数据</p>
+
+<p>+(NSData *)dataWithJSONObject:(id)obj options:(NSJSONWritingOptions)opt error:(NSError **)error;</p></li>
+</ul>
+
+
+<h3>XML</h3>
+
+<p>XML全称Extensible Markup Language。和JSON一样，也是常用的数据交互格式。一般称作XML文档。</p>
+
+<p>XML的解析方式有两种：</p>
+
+<ul>
+<li>DOM：一次性将整个XML文档加载进内存，比较适合解析小文件</li>
+<li>SAX：从根元素开始，按照顺序一个元素一个元素往下解析，比较适合解析大文件。</li>
+</ul>
+
+
+<p>在iOS中，解析XML的手段有很多。苹果原生的有NSXMLParser。SAX方式解析，使用简单。第三方框架有libxml2和GDataXML。libxml2使用纯C语言。同时支持DOM和SAX方式解析。GDataXML支持DOM方式解析，是有Google开发的。解析小文件用GDataXML。</p>
+
+<h4>NSXMLParser的使用方法</h4>
+
+<pre><code>// 传入XML数据，创建解析器
+NSXMLParser *parser = [NSXMLParser alloc] initWithData:data];
+// 设置代理，监听解析过程
+parser.delegate = self;
+// 开始解析
+[parser parse];
+</code></pre>
+
+<p>NSXMLParser采取SAX方式解析，特点是事件驱动，下面的情况会通知代理。</p>
+
+<ul>
+<li>当扫描到文档（Document）的开始与结束</li>
+<li>当扫描到元素（Element）的开始与结束</li>
+</ul>
+
+
+<p>当扫描到文档的开始时调用（开始解析）</p>
+
+<pre><code>- (void)parserDidStartDocument:(NSXMLParser *)parser
+</code></pre>
+
+<p>当扫描到文档的结束时调用（解析完毕）</p>
+
+<pre><code>- (void)parserDidEndDocument:(NSXMLParser *)parser
+</code></pre>
+
+<p>当扫描到元素的开始时调用（attributeDict存放着元素的属性）</p>
+
+<pre><code>- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namaspaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict;
+</code></pre>
+
+<p>当扫描到元素的结束时调用（attributeDict存放着元素的属性）</p>
+
+<pre><code>- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namaspaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
+</code></pre>
 </div>
 
 </article>
