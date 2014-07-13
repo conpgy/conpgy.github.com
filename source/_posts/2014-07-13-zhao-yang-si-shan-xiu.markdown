@@ -3,7 +3,7 @@ layout: post
 title: "朝阳寺禅修"
 date: 2014-07-13 12:27:17 +0800
 comments: true
-categories: 
+categories: 生活点滴
 ---
 
 一直想要去一个清净的地方体验一下。因缘一直都不太成熟。直到这个五一。因缘具足，在北京的朝阳寺参加了为期五天的禅修。
