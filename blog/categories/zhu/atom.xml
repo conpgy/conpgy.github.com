@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 术 | 无着的博客]]></title>
+  <link href="http://conpgy.github.io/blog/categories/zhu/atom.xml" rel="self"/>
+  <link href="http://conpgy.github.io/"/>
+  <updated>2014-07-13T14:53:07+08:00</updated>
+  <id>http://conpgy.github.io/</id>
+  <author>
+    <name><![CDATA[无着]]></name>
+    <email><![CDATA[conpgy@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[OC中JSON和XML的解析]]></title>
+    <link href="http://conpgy.github.io/blog/2014/07/13/oc-json-xml/"/>
+    <updated>2014-07-13T13:50:24+08:00</updated>
+    <id>http://conpgy.github.io/blog/2014/07/13/oc-json-xml</id>
+    <content type="html"><![CDATA[<h2>JSON</h2>
+
+<p>JSON是一种轻量级的数据格式，一般用于数据交互。服务器返回给客户端的数据一般都是JSON或者XML，当然除了下载文件。</p>
+
+<p>JSON的格式很像OC中的字典和数组。</p>
+
+<pre><code>{"name": "jack", "age": 10}
+{"names": ["jack", "rose", "jim"]}
+</code></pre>
+
+<p>标准的JSON格式key必须用双引号。要想从JSON中挖掘具体的数据，需要对JSON进行解析。JSON转换为OC数据类型：</p>
+
+<p><img src="../../../../../pictures/jsonOc.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+</feed>
