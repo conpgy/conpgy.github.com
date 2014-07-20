@@ -9,7 +9,7 @@
 	<meta name="author" content="无着">
 
 	
-	<meta name="description" content="Jul 13th, 2014 术 Comments OC中JSON和XML的解析 JSON JSON是一种轻量级的数据格式，一般用于数据交互。服务器返回给客户端的数据一般都是JSON或者XML，当然除了下载文件。 JSON的格式很像OC中的字典和数组。 {"name": "jack", "age &hellip;">
+	<meta name="description" content="Jul 20th, 2014 Comments 实现新浪微博图文混排效果 通常，我们都会有图片和文字混合起来展示的需求。像杂志中展示一篇文章。QQ发送带表情文字的信息。微博的展示等等&hellip; 这里，我们简单的实现一下表情和文字的混合显示。模仿新浪微博，实现效果如下图： 我分为三大步骤： &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +97,51 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-20T11:29:05+08:00" data-updated="true" itemprop="datePublished">Jul 20<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/07/20/weibo-emotion-text/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/07/20/weibo-emotion-text/" itemprop="url">实现新浪微博图文混排效果</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>通常，我们都会有图片和文字混合起来展示的需求。像杂志中展示一篇文章。QQ发送带表情文字的信息。微博的展示等等&hellip; 这里，我们简单的实现一下表情和文字的混合显示。模仿新浪微博，实现效果如下图：</p>
+
+<p><img src="../../../../../pictures/weibo.png" alt="" /></p>
+
+<p>我分为三大步骤：</p>
+
+<ol>
+<li>将表情插入到编辑框中</li>
+<li>将带有表情的富文本转换为带有表情描述的普通文本，并发送给服务器</li>
+<li>从服务器接收带有表情描述的普通文本，将表情描述解析成对应的表情</li>
+</ol>
+
+
+
+		
+		<a href="/blog/2014/07/20/weibo-emotion-text/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
