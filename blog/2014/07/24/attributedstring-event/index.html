@@ -9,7 +9,7 @@
 	<meta name="author" content="无着">
 
 	
-	<meta name="description" content="属性文本的截取与事件处理 属性文本的截取与事件处理 上一篇实现新浪微博图文混排谈到了表情与文本的混合排列。属性文本可以有效的设置一段文本中的文字可以有不同的属性。比方微博文本中有话题，超链接，@某人等等。对这些文本需要进行高亮和事件处理。跳转到相应的微博或者链接等等。要实现这个功能， &hellip;">
+	<meta name="description" content="属性文本的截取与事件处理 上一篇实现新浪微博图文混排谈到了表情与文本的混合排列。属性文本可以有效的设置一段文本中的文字可以有不同的属性。比方微博文本中有话题，超链接，@某人等等。对这些文本需要进行高亮和事件处理。跳转到相应的微博或者链接等等。要实现这个功能，可以分成四个步骤： 查找出所有的链接（ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,9 +97,7 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">属性文本的截取与事件处理</h1>
-	<div class="entry-content" itemprop="articleBody"><h2>属性文本的截取与事件处理</h2>
-
-<p>上一篇<a href="http://conpgy.github.io/blog/2014/07/20/weibo-emotion-text/">实现新浪微博图文混排</a>谈到了表情与文本的混合排列。属性文本可以有效的设置一段文本中的文字可以有不同的属性。比方微博文本中有话题，超链接，@某人等等。对这些文本需要进行高亮和事件处理。跳转到相应的微博或者链接等等。要实现这个功能，可以分成四个步骤：</p>
+	<div class="entry-content" itemprop="articleBody"><p>上一篇<a href="http://conpgy.github.io/blog/2014/07/20/weibo-emotion-text/">实现新浪微博图文混排</a>谈到了表情与文本的混合排列。属性文本可以有效的设置一段文本中的文字可以有不同的属性。比方微博文本中有话题，超链接，@某人等等。对这些文本需要进行高亮和事件处理。跳转到相应的微博或者链接等等。要实现这个功能，可以分成四个步骤：</p>
 
 <ol>
 <li>查找出所有的链接（用一个数组存放所有的链接）</li>
@@ -107,6 +105,9 @@
 <li>在被点击的链接的边框范围内添加高亮背景</li>
 <li>在touchesEnd中，移除高亮背景。并发出通知，通知相应的控制器进行事件处理。</li>
 </ol>
+
+
+<!-- more -->
 
 
 <p>查看完整代码，请猛击<a href="http://github.com/conpgy">这里</a>。</p>
