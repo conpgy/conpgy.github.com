@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 无着的博客]]></title>
   <link href="http://conpgy.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://conpgy.github.io/"/>
-  <updated>2014-07-25T08:38:54+08:00</updated>
+  <updated>2014-07-29T22:51:44+08:00</updated>
   <id>http://conpgy.github.io/</id>
   <author>
     <name><![CDATA[无着]]></name>
@@ -12,6 +12,267 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自定义瀑布流控件]]></title>
+    <link href="http://conpgy.github.io/blog/2014/07/29/waterflowview/"/>
+    <updated>2014-07-29T21:43:14+08:00</updated>
+    <id>http://conpgy.github.io/blog/2014/07/29/waterflowview</id>
+    <content type="html"><![CDATA[<p>在移动APP中，瀑布流越来越流行。本篇自定义一个简单的瀑布流控件。首先，模仿UITableView,定义一个数据源和代理协议。数据源协议有三个方法。如下：</p>
+
+<pre><code>@protocol GYWaterflowViewDataSource &lt;NSObject&gt;
+
+@required
+/** 有多少条数据 */
+-(NSUInteger)numberOfCellsInWaterflowView:(GYWaterflowView *)waterflowView;
+
+/** index位置对应的cell */
+-(GYWaterflowViewCell *)waterflowView:(GYWaterflowView *)waterflowView cellAtIndex:(NSUInteger)index;
+
+@optional
+/** 有多少列 */
+-(NSUInteger)numberOfColumnsInWaterflowView:(GYWaterflowView *)waterflowView;
+
+@end
+</code></pre>
+
+<!-- more -->
+
+
+<p>然后，定义协议的方法，如下：</p>
+
+<pre><code>@protocol GYWaterflowViewDelegate &lt;UIScrollViewDelegate&gt;
+
+@optional
+/** index位置cell的高度 */
+-(CGFloat)waterflowView:(GYWaterflowView *)waterflowView heightAtIndex:(NSUInteger)index;
+
+/** 选中index处的cell */
+-(void)waterflowView:(GYWaterflowView *)waterflowView didSelectAtIndex:(NSUInteger)index;
+
+/** 返回间距 */
+-(CGFloat)waterflowView:(GYWaterflowView *)waterflowView marginForType:(GYWaterflowViewMarginType)type;
+
+@end
+</code></pre>
+
+<p>这样，在控制器中我们就可以像使用tableView一样的轻松的使用这个瀑布流控件了。在控制器中，可以如下这样使用它。</p>
+
+<pre><code>#import "GYViewController.h"
+#import "GYWaterflowView.h"
+#import "GYWaterflowViewCell.h"
+
+@interface GYViewController ()&lt;GYWaterflowViewDataSource, GYWaterflowViewDelegate&gt;
+
+@end
+
+@implementation GYViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    // 添加一个瀑布流控件
+    GYWaterflowView *waterflowView = [[GYWaterflowView alloc] init];
+    waterflowView.frame = self.view.bounds;
+    waterflowView.dataSource = self;
+    waterflowView.delegate = self;
+    [self.view addSubview:waterflowView];
+}
+
+#pragma mark - waterflowView dataSoure
+
+-(NSUInteger)numberOfCellsInWaterflowView:(GYWaterflowView *)waterflowView
+{
+    return 100;
+}
+
+-(GYWaterflowViewCell *)waterflowView:(GYWaterflowView *)waterflowView cellAtIndex:(NSUInteger)index
+{
+    static NSString *identifier = @"waterflowViewCell";
+    GYWaterflowViewCell *cell = [waterflowView dequeueReusableCellWithIdentifier:identifier];
+
+    if (cell == nil) {
+        cell = [[GYWaterflowViewCell alloc] init];
+        cell.identifier = identifier;
+    }
+    cell.backgroundColor = GYRandomColor;
+
+    return cell;
+}
+
+#pragma mark - waterflowView delegate
+
+-(CGFloat)waterflowView:(GYWaterflowView *)waterflowView heightAtIndex:(NSUInteger)index
+{
+    return (arc4random_uniform(40) + 70);
+}
+
+@end
+</code></pre>
+
+<p>效果如下图：</p>
+
+<p><img src="../../../../../pictures/waterflowView.png" alt="" /></p>
+
+<p>接下来，是如何实现<code>GYWaterflowView</code>。模仿tableView，定义一个<code>reloadData</code>方法，当调用这个方法时，会刷新里面的所有子控件。我们定义一个<code>GYWaterflowViewCell</code>作为它的子控件。在这个cell类中，提供一个<code>identifier</code>属性用来标识cell。在<code>reloadData</code>方法中，需要重新计算所有的cell的frame。然后在<code>layoutSubView</code>方法中将在屏幕上的cell显示出来。<code>reloadData</code>方法的具体实现如下：</p>
+
+<pre><code>-(void)reloadData
+{
+    // 清空之前的数据
+    [self.displayingCells.allValues makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.displayingCells removeAllObjects];
+    [self.cellFrames removeAllObjects];
+    [self.reuseableCells removeAllObjects];
+
+    // 数据总条数
+    NSUInteger numberOfCells = [self.dataSource numberOfCellsInWaterflowView:self];
+
+    // 总列数
+    NSUInteger numberOfColumns = [self numberOfColumns];
+
+    // 间距
+    CGFloat topM = [self marginForType:GYWaterflowViewMarginTypeTop];
+    CGFloat leftM = [self marginForType:GYWaterflowViewMarginTypeLeft];
+    CGFloat rowM = [self marginForType:GYWaterflowViewMarginTypeRow];
+    CGFloat columnM = [self marginForType:GYWaterflowViewMarginTypeColumn];
+    CGFloat bottomM = [self marginForType:GYWaterflowViewMarginTypeBottom];
+
+    // 计算cell的宽度
+    CGFloat cellW = [self cellWidth];
+
+    // 用一个C语言数组存放所有列的最大y值
+    CGFloat maxYOfColumns[numberOfColumns];
+    // 初始化
+    for (int i = 0; i &lt; numberOfColumns; i++) {
+        maxYOfColumns[i] = 0.0;
+    }
+
+    // 计算所有cell的frame
+    for (int i = 0; i &lt; numberOfCells; i++) {
+        // cell处在第几列
+        NSUInteger cellColumn = 0;
+
+        // cell所处那列的最大Y值(最短那一列的最大Y值)
+        CGFloat cellMaxYOfColumn = maxYOfColumns[cellColumn];
+        // 求出最短的一列
+        for (int j = 1; j&lt;numberOfColumns; j++) {
+            if (maxYOfColumns[j] &lt; cellMaxYOfColumn) {
+                cellColumn = j;
+                cellMaxYOfColumn = maxYOfColumns[j];
+            }
+        }
+
+        // 计算出cell的位置
+        CGFloat cellX = leftM + (cellW + columnM) * cellColumn;
+        CGFloat cellY = 0;
+        if (cellMaxYOfColumn == 0.0) {   // cell处在第一行
+            cellY = topM;
+        } else {
+            cellY = cellMaxYOfColumn + rowM;
+        }
+
+        // cell的高度
+        CGFloat cellH = [self heightAtIndex:i];
+
+        // 计算出cell的frame
+        CGRect cellFrame = CGRectMake(cellX, cellY, cellW, cellH);
+
+        // 将cell的frame添加到数组中
+        [self.cellFrames addObject:[NSValue valueWithCGRect:cellFrame]];
+
+        // 更新cell所处列的最大y值
+        maxYOfColumns[cellColumn] = CGRectGetMaxY(cellFrame);
+    }
+
+    // 设置contentSize
+    CGFloat contentH = maxYOfColumns[0];
+    for (int i = 1; i &lt; numberOfColumns; i++) {
+        if (maxYOfColumns[i] &gt; contentH) {
+            contentH = maxYOfColumns[i];
+        }
+    }
+    contentH += bottomM;
+    self.contentSize = CGSizeMake(0, contentH);
+
+}
+</code></pre>
+
+<p>这样，每个cell的的frame都计算出来了，并保存在cellFrames数组中。也计算出来了waterflowView的contentSize。然后就可以在<code>layoutSubView</code>中，将在屏幕上的cell显示出来。<code>layoutSubViews</code>具体实现如下：</p>
+
+<pre><code>-(void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    // cell总数
+    NSUInteger numberOfCells = self.cellFrames.count;
+
+    for (int i = 0; i &lt; numberOfCells; i++) {
+        // 取出i位置的cellFrame
+        CGRect cellFrame = [self.cellFrames[i] CGRectValue];
+
+        // 从字典中取出i位置的cell
+        GYWaterflowViewCell *cell = self.displayingCells[@(i)];
+
+        // 判断cellFrame在不在屏幕上
+        if ([self isInScreen:cellFrame]) {
+            if (cell == nil) {
+                cell = [self.dataSource waterflowView:self cellAtIndex:i];
+                cell.frame = cellFrame;
+                [self addSubview:cell];
+
+                // 存放到字典中
+                self.displayingCells[@(i)] = cell;
+            }
+        } else {
+            if (cell) {
+                // 从scrollView和displayingCells字典中删除
+                [cell removeFromSuperview];
+                [self.displayingCells removeObjectForKey:@(i)];
+
+                // 存放到缓存池中
+                [self.reuseableCells addObject:cell];
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>通过每个cell的frame，计算这个cell是否在屏幕上，如果不是，则不显示，并且，如果这个cell刚从屏幕上移除，那么将它从<code>waterflowView</code>上移除，并且从正在显示的cell的字典中删除，然后放入缓存池中。如果cell的frame在屏幕范围内，那么需要判断这个cell在滚动之前是否已经在屏幕上了，如果在，则什么也不做，如果不在，则从数据源方法中获得这个cell并且添加到<code>waterflowView</code>中。<code>isInScreen:</code>方法实现如下：</p>
+
+<pre><code>/**
+ *  判断cell的frame是否显示在屏幕上
+ */
+- (BOOL)isInScreen:(CGRect)frame
+{
+    return ((CGRectGetMaxY(frame) &gt; self.contentOffset.y) &amp;&amp; (CGRectGetMinY(frame) &lt; self.contentOffset.y + self.bounds.size.height));
+}
+</code></pre>
+
+<p>还有一个注意点是，当瀑布流控件添加到控制器的view中时，需要显示这个控件的内容，因此我们可以在<code>willMoveToSuperView:</code>方法中调用<code>reloadData</code>方法，让它一添加就进行显示。</p>
+
+<p>还有一个注意点是，我们提供了cell的复用机制，<code>- (id)dequeueReusableCellWithIdentifier:(NSString *)identifier</code>的实现如下：</p>
+
+<pre><code>-(id)dequeueReusableCellWithIdentifier:(NSString *)identifier
+{
+    __block GYWaterflowViewCell *reuseableCell = nil;
+
+    [self.reuseableCells enumerateObjectsUsingBlock:^(GYWaterflowViewCell *cell, BOOL *stop) {
+        if ([cell.identifier isEqualToString:identifier]) {
+            reuseableCell = cell;
+            *stop = YES;
+        }
+    }];
+
+    if (reuseableCell) {
+        [self.reuseableCells removeObject:reuseableCell];
+    }
+
+    return reuseableCell;
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[属性文本的截取与事件处理]]></title>
