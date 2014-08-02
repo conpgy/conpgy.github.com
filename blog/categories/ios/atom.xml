@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | 无着的博客]]></title>
   <link href="http://conpgy.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://conpgy.github.io/"/>
-  <updated>2014-08-02T20:42:39+08:00</updated>
+  <updated>2014-08-02T21:59:48+08:00</updated>
   <id>http://conpgy.github.io/</id>
   <author>
     <name><![CDATA[无着]]></name>
@@ -12,6 +12,191 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git基本使用]]></title>
+    <link href="http://conpgy.github.io/blog/2014/08/02/git-brief-introduction/"/>
+    <updated>2014-08-02T20:50:03+08:00</updated>
+    <id>http://conpgy.github.io/blog/2014/08/02/git-brief-introduction</id>
+    <content type="html"><![CDATA[<p><strong>git是Linux之父，Linus这个牛逼哄哄的大神发明的。本来别人以为，这位大神创建了Linux传奇已是人生巅峰了。而几十年后，这位牛人又创造了一个奇迹。常人难以望其项背。大神之所以成为大神，是因为他生来就是一位大神。</strong></p>
+
+<h3>git和SVN的简单对比</h3>
+
+<p><strong>速度</strong></p>
+
+<ul>
+<li>在很多情况下，git的速度远远比SVN快。</li>
+</ul>
+
+
+<p><strong>结构</strong></p>
+
+<ul>
+<li>SVN是集中式管理，git是分布式管理</li>
+</ul>
+
+
+<p><strong>其他</strong></p>
+
+<ul>
+<li>SVN使用比较笨拙，git轻松拥有无限个分支。</li>
+<li>SVN必须联网才能工作，git支持本地版本控制。</li>
+<li>就版本的SVN会在每个目录下放置一个.svn，git只会在根目录下有一个.git。</li>
+</ul>
+
+
+<p>分布式对别集中式的最大区别是：在分布式下，开发者可以在本地提交，每个开发者机器上都有一个服务器的数据库。</p>
+
+<!-- more -->
+
+
+<h3>git常用指令</h3>
+
+<ul>
+<li><p>git help: git指令帮助手册</p>
+
+<blockquote><p>查看其他指令的做法: <code>git help 其他指令</code></p>
+
+<p>配置用户名: <code>git config "user.name" 用户名</code></p>
+
+<p>配置邮箱: <code>git config "user.email" 邮箱</code></p>
+
+<p>查看配置信息: git config -l"</p>
+
+<p>编辑配置信息: <code>git config -e</code></p>
+
+<p>设置命令别名: <code>git config alias.别名 原指令名</code></p>
+
+<p>设置带参数的别名: <code>git config alias.别名 "原指令名称 参数"</code></p>
+
+<p>将此设置应用到整个系统中: <code>git config --global</code></p></blockquote></li>
+<li><p>git status: 查看文件状态</p></li>
+<li><p>git log: 查看文件的修改日志</p>
+
+<blockquote><p>用一行的方式查看日志信息: git log &mdash;pretty=oneline
+<strong>查看日志配置一个好用的方式</strong></p></blockquote>
+
+<p>  git config &mdash;global alias.lg &ldquo;log &mdash;color &mdash;graph &mdash;pretty=format:&lsquo;%Cred%h%Creset &ndash;%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an>%Creset&rsquo; &mdash;abbrev-commit&rdquo;</p></li>
+<li><p>git diff: 查看文件最新改动的状态</p></li>
+<li><p>git init: 初始化一个空的本地仓库，生成一个.git目录，用于维护版本信息。</p></li>
+<li>git add: 将<em>工作区</em>的文件保存到<em>暂缓区</em>
+
+<blockquote><p>保存某个文件到暂缓区：git add 文件名</p>
+
+<p>保存当前路径下的所有文件到暂缓区: git add .</p></blockquote></li>
+<li>git commit: 将暂缓区的文件提交到当前分支。
+
+<blockquote><p>提交某个文件到分支: <code>git commit -m "注释" 文件名</code></p>
+
+<p>保存当前路径下的所有文件到分支: <code>git commit -m "注释"</code></p></blockquote></li>
+<li>git reset: 版本回退(建议加上&mdash;hard参数，git支持无限次后悔)
+
+<blockquote><p>回退到上一个版本: <code>git reset --hard HEAD^</code></p>
+
+<p>回退到上上一个版本: <code>git reset --hard HEAD^^</code></p>
+
+<p>回退到上N个版本: <code>git reset --hard HEAD~N</code></p>
+
+<p>回退到任意一个版本: <code>git reset --hard 版本号</code></p></blockquote></li>
+<li>git reflog: 查看指令使用记录（能够查看所有的版本号）</li>
+<li><p>git rm: 删除文件（删除完之后要进行commit操作，才能同步到版本库）</p></li>
+<li><p>git clone: 下载远程仓库到本地</p></li>
+<li>git pull: 下载远程仓库的最新信息到本地仓库</li>
+<li>git push: 将本地的仓库信息推送到远程仓库</li>
+</ul>
+
+
+<h3>工作原理</h3>
+
+<p>要了解git的工作原理，必须要知道几个核心的概念:</p>
+
+<p><strong>工作区(Working Directory)</strong>: 仓库文件夹里除.git目录以外的内容</p>
+
+<p><strong>版本库(Repository)</strong>: .git目录，用于存储记录版本信息</p>
+
+<ul>
+<li><strong>暂缓区</strong></li>
+<li><strong>分支（master）</strong>: git自动创建的第一个分支</li>
+<li><strong>HEAD指针</strong>: 用于指向当前分支</li>
+</ul>
+
+
+<p><strong>git add和git commit的原理</strong></p>
+
+<ul>
+<li><code>git add .</code>: 把文件修改添加到暂存区</li>
+<li><code>git commit:</code>: 把暂存区的所有内容提交到当前分支</li>
+</ul>
+
+
+<p><strong>工作原理图</strong></p>
+
+<p><img src="../../../../../pictures/gitadd.png" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[svn基本使用]]></title>
+    <link href="http://conpgy.github.io/blog/2014/08/02/svn-brief-introduction/"/>
+    <updated>2014-08-02T20:14:20+08:00</updated>
+    <id>http://conpgy.github.io/blog/2014/08/02/svn-brief-introduction</id>
+    <content type="html"><![CDATA[<p><strong>基本操作</strong></p>
+
+<p><img src="../../../../../pictures/svn.png" alt="" /></p>
+
+<!-- more -->
+
+
+<p>使用环境包含客户端和服务器环境。服务器用于存储客户端上传的源代码。Windows上可以使用Visual SVN Server。在Mac上，客户端可以使用Cornerstone这个软件进行代码的上传和同步等。</p>
+
+<h3>SVN常用命令</h3>
+
+<ul>
+<li>svn checkout: 下载服务器的代码到本地（简写 svn co）</li>
+<li>svn commit: 将改动的文件提交到服务器</li>
+<li>svn update: 更新服务器的代码到本地（简写 svn up）</li>
+<li>svn add: 向本地的版本控制库中添加新文件</li>
+<li>svn delete 、svn remove: 从本地的版本库中删除文件（简写 svn del、svn rm）</li>
+<li>svn move: 移动文件或者目录或文件改名</li>
+<li>svn mkdir: 创建纳入版本控制下的新目录</li>
+<li>svn revert: 撤销之前的一切修改</li>
+<li>svn merge: 将两个版本之间的差异合并到当前文件</li>
+<li>svn info: 查看文件的详细信息</li>
+<li>svn diff: 查看不同版本的区别</li>
+<li>svn log: 查看日志信息</li>
+<li>svn list: 列出版本库下的文件或目录列表</li>
+<li>svn status: 查看文件状态</li>
+<li>svn help: 获取帮助信息</li>
+<li>svn lock: 加锁</li>
+<li>svn unlock: 解锁</li>
+</ul>
+
+
+<h3>常见问题</h3>
+
+<p>不小心写错了很多东西，想撤销所有的操作（还没有修改提交到服务器）</p>
+
+<pre><code>svn revert
+</code></pre>
+
+<p>不小心删错了文件，想把文件恢复过来（还未把删除提交到服务器）</p>
+
+<pre><code>svn revert
+</code></pre>
+
+<p>不小心写错了很多东西，想撤销所有的操作（已经将修改提交到服务器）</p>
+
+<pre><code>svn update -r 版本号
+</code></pre>
+
+<p>不小心删错了文件，想把文件恢复过来（已经将修改提交到服务器）</p>
+
+<pre><code>svn update -r 版本号
+</code></pre>
+
+<p><strong>注意</strong> .svn这个目录记录着非常关键的信息，不要收工修改或删除这个目录和里面的文件。否则会导致本地的工作副本被破坏。无法再进行操作。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自定义瀑布流控件]]></title>
