@@ -1,0 +1,216 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>svn基本使用 - 无着的博客</title>
+	<meta name="author" content="无着">
+
+	
+	<meta name="description" content="Svn基本使用 基本操作 使用环境包含客户端和服务器环境。服务器用于存储客户端上传的源代码。Windows上可以使用Visual SVN Server。在Mac上，客户端可以使用Cornerstone这个软件进行代码的上传和同步等。 SVN常用命令 svn checkout: &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="无着的博客" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://conpgy.github.io/blog/2014/08/02/svn-brief-introduction/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("conpgy@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+<hgroup>
+  <h1><a href="/">无着的博客</a></h1>
+  
+    <h2>一即一切，一切即一</h2>
+  
+</hgroup>
+
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/uzhuo">About me</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:conpgy@gmail.com" title="Email">Email</a>
+		
+		
+		
+		
+		
+			<a class="github" href="https://github.com/conpgy" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Svn基本使用</h1>
+	<div class="entry-content" itemprop="articleBody"><p><strong>基本操作</strong></p>
+
+<p><img src="../../../../../pictures/svn.png" alt="" /></p>
+
+<!-- more -->
+
+
+<p>使用环境包含客户端和服务器环境。服务器用于存储客户端上传的源代码。Windows上可以使用Visual SVN Server。在Mac上，客户端可以使用Cornerstone这个软件进行代码的上传和同步等。</p>
+
+<h3>SVN常用命令</h3>
+
+<ul>
+<li>svn checkout: 下载服务器的代码到本地（简写 svn co）</li>
+<li>svn commit: 将改动的文件提交到服务器</li>
+<li>svn update: 更新服务器的代码到本地（简写 svn up）</li>
+<li>svn add: 向本地的版本控制库中添加新文件</li>
+<li>svn delete 、svn remove: 从本地的版本库中删除文件（简写 svn del、svn rm）</li>
+<li>svn move: 移动文件或者目录或文件改名</li>
+<li>svn mkdir: 创建纳入版本控制下的新目录</li>
+<li>svn revert: 撤销之前的一切修改</li>
+<li>svn merge: 将两个版本之间的差异合并到当前文件</li>
+<li>svn info: 查看文件的详细信息</li>
+<li>svn diff: 查看不同版本的区别</li>
+<li>svn log: 查看日志信息</li>
+<li>svn list: 列出版本库下的文件或目录列表</li>
+<li>svn status: 查看文件状态</li>
+<li>svn help: 获取帮助信息</li>
+<li>svn lock: 加锁</li>
+<li>svn unlock: 解锁</li>
+</ul>
+
+
+<h3>常见问题</h3>
+
+<p>不小心写错了很多东西，想撤销所有的操作（还没有修改提交到服务器）</p>
+
+<pre><code>svn revert
+</code></pre>
+
+<p>不小心删错了文件，想把文件恢复过来（还未把删除提交到服务器）</p>
+
+<pre><code>svn revert
+</code></pre>
+
+<p>不小心写错了很多东西，想撤销所有的操作（已经将修改提交到服务器）</p>
+
+<pre><code>svn update -r 版本号
+</code></pre>
+
+<p>不小心删错了文件，想把文件恢复过来（已经将修改提交到服务器）</p>
+
+<pre><code>svn update -r 版本号
+</code></pre>
+
+<p><strong>注意</strong> .svn这个目录记录着非常关键的信息，不要收工修改或删除这个目录和里面的文件。否则会导致本地的工作副本被破坏。无法再进行操作。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    无着
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'uzhuo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://conpgy.github.io/blog/2014/08/02/svn-brief-introduction/';
+        var disqus_url = 'http://conpgy.github.io/blog/2014/08/02/svn-brief-introduction/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
