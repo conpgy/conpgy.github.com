@@ -1,0 +1,312 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>iOS中的多线程 - 无着的博客</title>
+	<meta name="author" content="无着">
+
+	
+	<meta name="description" content="iOS中的多线程 ios中的实现方案，有下图所列出的这些： NSThread 一个NSThread对象就代表一条线程。创建NSThread线程有三个方法。 // 1.通过init创建，在调用start启动
+NSThread *thread = [[NSThread alloc] &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="无着的博客" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://conpgy.github.io/blog/2014/08/13/ios-thread/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("conpgy@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+	
+</div>
+<hgroup>
+  <h1><a href="/">无着的博客</a></h1>
+  
+    <h2>一即一切，一切即一</h2>
+  
+</hgroup>
+
+
+<nav id="main-nav"><ul class="main">
+    <li><a href="/">Blog</a></li>
+    <li><a href="http://about.me/uzhuo">About me</a></li>
+    <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:conpgy@gmail.com" title="Email">Email</a>
+		
+		
+		
+		
+		
+			<a class="github" href="https://github.com/conpgy" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    	
+    	
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">iOS中的多线程</h1>
+	<div class="entry-content" itemprop="articleBody"><p>ios中的实现方案，有下图所列出的这些：</p>
+
+<p><img src="../../../../../pictures/thread.png" alt="" /></p>
+
+<!--more-->
+
+
+<h3>NSThread</h3>
+
+<p>一个NSThread对象就代表一条线程。创建NSThread线程有三个方法。</p>
+
+<pre><code>// 1.通过init创建，在调用start启动
+NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];
+[thread start];
+
+// 2.创建线程后自动启动线程
+[NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+
+// 3. 隐式创建并启动线程
+[self performSelectorInBackground:@selector(run) withObject:nil];
+</code></pre>
+
+<p>主线程的相关方法有：</p>
+
+<pre><code>(NSThread *)mainThread;     // 获得主线程
+-(BOOL)isMainThread;        // 是否为主线程
++(BOOL)isMainThread;        // 是否为主线程
+</code></pre>
+
+<p>获得当前线程，可以调用<code>+currentThread</code>方法。</p>
+
+<p>线程的调度优先级:</p>
+
+<pre><code>+ (double)threadPriority;
++ (BOOL)setThreadPriority:(double)p;
+</code></pre>
+
+<p>调度优先级的取值范围是0.0~1.0，默认是0.5,值越大，优先级越高。</p>
+
+<p>要访问或设置线程的名字,调用如下方法:</p>
+
+<pre><code>- (void)setName:(NSString *)n;
+- (NSString *)name;
+</code></pre>
+
+<h5>控制线程状态</h5>
+
+<ul>
+<li><p>启动线程</p>
+
+<ul>
+<li>(void)start;</li>
+</ul>
+</li>
+<li><p>阻塞（暂停）线程</p>
+
+<ul>
+<li>(void)sleepUntilDate:(NSDate *)date;</li>
+<li>(void)sleepForTimeInterval:(NSTimeInterval)ti;</li>
+</ul>
+</li>
+<li><p>强制停止线程</p>
+
+<ul>
+<li>(void)exit;   // 进入死亡状态</li>
+</ul>
+</li>
+</ul>
+
+
+<p>一旦线程停止了，就不能再次开启任务。</p>
+
+<h5>多线程的安全隐患</h5>
+
+<p>1块资源可能会被多个线程共享，也就是多个线程可能会访问同一块资源,比如多个线程访问同一个对象、同一个变量、同一个文件,当多个线程访问同一块资源时，很容易引发数据错乱和数据安全问题。如下：</p>
+
+<p><img src="../../../../../pictures/thread_safe.png" alt="" /></p>
+
+<h5>互斥锁</h5>
+
+<p>可以通过加锁解决多线程的安全问题。</p>
+
+<pre><code>@synchronized(锁对象) { // 需要锁定的代码  }
+</code></pre>
+
+<p><strong>锁定一份代码只能加一把锁。</strong></p>
+
+<p>互斥锁的优缺点</p>
+
+<ul>
+<li>优点：能有效防止因多线程抢夺资源造成的数据安全问题*</li>
+<li>缺点：需要消耗大量的CPU资源</li>
+</ul>
+
+
+<p>使用互斥锁的前提是多线程抢夺统一块资源。</p>
+
+<h5>原子和非原子属性</h5>
+
+<p>OC在定义属性时有nonatomic和atomic两种选择</p>
+
+<ul>
+<li>atomic：原子属性，为setter方法加锁（默认就是atomic）</li>
+<li>nonatomic：非原子属性，不会为setter方法加锁</li>
+</ul>
+
+
+<p><strong>atomic加锁原理：</strong></p>
+
+<pre><code>@property (assign, atomic) int age;
+- (void)setAge:(int)age
+{
+    @synchronized(self) {
+        _age = age;
+    }
+}
+</code></pre>
+
+<p><strong>nonatomic和atomic对比</strong></p>
+
+<ul>
+<li>atomic：线程安全，需要消耗大量的资源</li>
+<li>nonatomic：非线程安全，适合内存小的移动设备</li>
+</ul>
+
+
+<p><strong>iOS开发的建议</strong></p>
+
+<ul>
+<li>所有属性都声明为nonatomic</li>
+<li>尽量避免多线程抢夺同一块资源</li>
+<li>尽量将加锁、资源抢夺的业务逻辑交给服务器端处理，减小移动客户端的压力</li>
+</ul>
+
+
+<h5>线程间通信</h5>
+
+<p>在1个进程中，线程往往不是孤立存在的，多个线程之间需要经常进行通信。线程间通信体现在：</p>
+
+<ul>
+<li>1个线程传递数据给另1个线程</li>
+<li>在1个线程中执行完特定任务后，转到另1个线程继续执行任务</li>
+</ul>
+
+
+<p><strong>线程间通信常用方法</strong></p>
+
+<pre><code>- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait;
+- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait;
+</code></pre>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2014
+
+    无着
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+		</div>
+	</div>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'uzhuo';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://conpgy.github.io/blog/2014/08/13/ios-thread/';
+        var disqus_url = 'http://conpgy.github.io/blog/2014/08/13/ios-thread/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
