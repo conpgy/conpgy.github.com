@@ -4,7 +4,7 @@
   <title><![CDATA[无着的博客]]></title>
   <link href="http://conpgy.github.io/atom.xml" rel="self"/>
   <link href="http://conpgy.github.io/"/>
-  <updated>2014-08-13T12:24:04+08:00</updated>
+  <updated>2014-08-13T12:29:41+08:00</updated>
   <id>http://conpgy.github.io/</id>
   <author>
     <name><![CDATA[无着]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[iOS中的多线程]]></title>
+    <title type="html"><![CDATA[iOS中的多线程NSThread]]></title>
     <link href="http://conpgy.github.io/blog/2014/08/13/ios-thread/"/>
     <updated>2014-08-13T11:07:00+08:00</updated>
     <id>http://conpgy.github.io/blog/2014/08/13/ios-thread</id>
