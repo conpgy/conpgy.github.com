@@ -3,7 +3,7 @@ layout: post
 title: "iOS中的多线程NSThread"
 date: 2014-08-13 11:07:00 +0800
 comments: true
-categories: 
+categories: iOS
 ---
 ios中的实现方案，有下图所列出的这些：
 
